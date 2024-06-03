@@ -25,17 +25,20 @@
 
       socket.on("message", (message) => {
         const p = document.createElement("p");
-        p.innerText = message;
+        p.innerText = "Them: " + message;
         allMessages.appendChild(p);
+        console.log("Rcv msg: " + message);
       });
-
-      socket.on("message", (message) => console.log("Rcv msg: " + message));
 
       sendBtn.addEventListener("click", (e) => {
         const message = messageInput.value;
         console.log("Message: " + message);
         socket.emit("user-message", message);
         messageInput.value = "";
+
+        const p = document.createElement("p");
+        p.innerText = "Me: " + message;
+        allMessages.appendChild(p);
       });
 
       var input = document.getElementById("message");
