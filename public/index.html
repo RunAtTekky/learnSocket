@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
     <title>Chat App</title>
   </head>
   <body>
@@ -33,6 +34,15 @@
         const message = messageInput.value;
         console.log("Message: " + message);
         socket.emit("user-message", message);
+        messageInput.value = "";
+      });
+
+      var input = document.getElementById("message");
+      input.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          document.getElementById("sendBtn").click();
+        }
       });
     </script>
   </body>
