@@ -26,6 +26,7 @@
       socket.on("message", (message) => {
         const p = document.createElement("p");
         p.innerText = "Them: " + message;
+        p.style.backgroundColor = "aqua";
         allMessages.appendChild(p);
         console.log("Rcv msg: " + message);
       });
