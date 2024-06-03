@@ -3,51 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="index.css" />
     <title>Chat App</title>
   </head>
   <body>
-    <h1>This is a chatting APP</h1>
-    <div id="textField">
-      <input type="text" id="message" placeholder="Enter Message" />
-      <button id="sendBtn">Send</button>
-    </div>
-
-    <div id="messages"></div>
-
-    <script src="/socket.io/socket.io.js"></script>
+    <input type="text" id="name" placeholder="Enter name" />
+    <input type="text" id="codeInput" placeholder="Enter Code" />
+    <button id="createRoom">Create Room</button>
+    <button id="joinRoom">Join Room</button>
 
     <script>
-      const socket = io();
-      const sendBtn = document.getElementById("sendBtn");
-      const messageInput = document.getElementById("message");
-      const allMessages = document.getElementById("messages");
+      const createRoom = document.getElementById("createRoom");
+      const joinRoom = document.getElementById("joinRoom");
+      const codeInput = document.getElementById("codeInput").innerText;
 
-      socket.on("message", (message) => {
-        const p = document.createElement("p");
-        p.innerText = "Them: " + message;
-        p.style.backgroundColor = "aqua";
-        allMessages.appendChild(p);
-        console.log("Rcv msg: " + message);
+      createRoom.addEventListener("click", (e) => {
+        console.log("You created a room");
+        window.location.replace("/room?code=" + codeInput);
       });
 
-      sendBtn.addEventListener("click", (e) => {
-        const message = messageInput.value;
-        console.log("Message: " + message);
-        socket.emit("user-message", message);
-        messageInput.value = "";
-
-        const p = document.createElement("p");
-        p.innerText = "Me: " + message;
-        allMessages.appendChild(p);
-      });
-
-      var input = document.getElementById("message");
-      input.addEventListener("keypress", (event) => {
-        if (event.key === "Enter") {
-          event.preventDefault();
-          document.getElementById("sendBtn").click();
-        }
+      joinRoom.addEventListener("click", (e) => {
+        console.log("You joined a room");
+        window.location.replace("/room?code=" + codeInput);
       });
     </script>
   </body>

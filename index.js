@@ -17,7 +17,11 @@ io.on("connection", (socket) => {
 app.use(express.static(path.resolve("./public")));
 
 app.get("/", (req, res) => {
-  return res.sendFile("/public/index.html");
+  return res.sendFile(__dirname + "/public/index.html");
+});
+
+app.get("/room", (req, res) => {
+  return res.sendFile(__dirname + "/public/room.html");
 });
 
 server.listen(9000, () => console.log("Server started at port:9000"));
